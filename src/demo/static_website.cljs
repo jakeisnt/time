@@ -5,7 +5,7 @@
   (if (< k 10) (str "0" k) k))
 
 ; get the current time
-(defn getCurrentTime []
+(defn getStandardTime []
   (let [date (js/Date.)]
     (let [hrs (updateTime (.getHours date))
           min (updateTime (.getMinutes date))
@@ -13,9 +13,9 @@
     (str hrs ":" min ":" sec))))
 
 ; update the website with the current time
-(defn setCurrentTime []
-    (set! (.-innerText (.getElementById js/document "clock")) (getCurrentTime))
-    (js/setTimeout setCurrentTime 1000))
+(defn setCurrentTime [elementId getTimeFunc]
+    (set! (.-innerText (.getElementById js/document elementId)) (getTimeFunc))
+    (js/setTimeout (fn [] (setCurrentTime elementId getTimeFunc)) 1000))
 
 ;; start the code
-(setCurrentTime)
+(setCurrentTime "clock" getStandardTime)
