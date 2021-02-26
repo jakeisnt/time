@@ -17,7 +17,6 @@
 ; update the website with the current time
 (defn setCurrentTime []
     (set! (.-innerText (.getElementById js/document "clock")) (getCurrentTime))
-    (js/console.log (getCurrentTime))
     (js/setTimeout setCurrentTime 1000))
 
 ;; start the code
