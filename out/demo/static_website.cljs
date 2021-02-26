@@ -53,6 +53,18 @@
     (set! (.-innerText (.getElementById js/document elementId)) (getTimeFunc))
     (js/setTimeout (fn [] (setCurrentTime elementId getTimeFunc)) 0))
 
-;; start the code
-(setCurrentTime "clock" getStandardTime)
-(setCurrentTime "neralie" getNeralieTime)
+;; list of clocks to use and their names
+(def CLOCKLIST (list (list "clock" getStandardTime)
+                     (list "neralie" getNeralieTime)))
+
+;; given an element of the clocklist, make
+(defn makeElement [ls]
+  (let [elem (.createElement js/document "div")
+        elemId (first ls)
+        elemTimeFunc (nth ls 1)]
+    (.setAttribute elem "id" elemId)
+    (.setAttribute elem "class" "site__title")
+    (.appendChild (.-body js/document) elem)
+    (setCurrentTime elemId elemTimeFunc)))
+
+(run! makeElement CLOCKLIST)

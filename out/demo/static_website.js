@@ -52,7 +52,19 @@ return setTimeout((function (){
 return demo.static_website.setCurrentTime.call(null,elementId,getTimeFunc);
 }),(0));
 });
-demo.static_website.setCurrentTime.call(null,"clock",demo.static_website.getStandardTime);
-demo.static_website.setCurrentTime.call(null,"neralie",demo.static_website.getNeralieTime);
+demo.static_website.CLOCKLIST = (new cljs.core.List(null,(new cljs.core.List(null,"clock",(new cljs.core.List(null,demo.static_website.getStandardTime,null,(1),null)),(2),null)),(new cljs.core.List(null,(new cljs.core.List(null,"neralie",(new cljs.core.List(null,demo.static_website.getNeralieTime,null,(1),null)),(2),null)),null,(1),null)),(2),null));
+demo.static_website.makeElement = (function demo$static_website$makeElement(ls){
+var elem = document.createElement("div");
+var elemId = cljs.core.first.call(null,ls);
+var elemTimeFunc = cljs.core.nth.call(null,ls,(1));
+elem.setAttribute("id",elemId);
+
+elem.setAttribute("class","site__title");
+
+document.body.appendChild(elem);
+
+return demo.static_website.setCurrentTime.call(null,elemId,elemTimeFunc);
+});
+cljs.core.run_BANG_.call(null,demo.static_website.makeElement,demo.static_website.CLOCKLIST);
 
 //# sourceMappingURL=static_website.js.map
