@@ -17,7 +17,7 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
     - name: Compile website
-      run: nix-shell --run "clj -m cljs.main -d \"out\" -c demo.static-website -r"
+      run: nix shell --command "clj -m cljs.main -d \"out\" -c demo.static-website -r"
     - name: Disable Jekyll rendering
       run: touch build/site/.nojekyll
     - name: Deploy

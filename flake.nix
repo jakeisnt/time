@@ -24,5 +24,6 @@
         #       clj -m cljs.main -d "out" -c demo.static-website -r
         #     '';
         #   });
+        devShell = import ./shell.nix;
       });
 }
