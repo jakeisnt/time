@@ -52,6 +52,7 @@ return setTimeout((function (){
 return demo.static_website.setCurrentTime.call(null,elementId,getTimeFunc);
 }),(0));
 });
-demo.static_website.setCurrentTime.call(null,"clock",demo.static_website.getNeralieTime);
+demo.static_website.setCurrentTime.call(null,"clock",demo.static_website.getStandardTime);
+demo.static_website.setCurrentTime.call(null,"neralie",demo.static_website.getNeralieTime);
 
 //# sourceMappingURL=static_website.js.map

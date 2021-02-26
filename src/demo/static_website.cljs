@@ -54,4 +54,5 @@
     (js/setTimeout (fn [] (setCurrentTime elementId getTimeFunc)) 0))
 
 ;; start the code
-(setCurrentTime "clock" getNeralieTime)
+(setCurrentTime "clock" getStandardTime)
+(setCurrentTime "neralie" getNeralieTime)
