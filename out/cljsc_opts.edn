@@ -1,1 +1,1 @@
-{:output-dir "out", :main demo.static-website, :output-to "out/main.js", :aot-cache true}
+{:output-dir "out", :main time.main, :output-to "out/main.js", :aot-cache true}

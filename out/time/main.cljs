@@ -1,4 +1,4 @@
-(ns demo.static-website)
+(ns time.main)
 
 (defn foldr [fnc base lst]
   (if (empty? lst)
