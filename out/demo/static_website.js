@@ -19,8 +19,6 @@ return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(hrs),":",cljs.core.str.cljs$
 demo.static_website.setCurrentTime = (function demo$static_website$setCurrentTime(){
 (document.getElementById("clock").innerText = demo.static_website.getCurrentTime.call(null));
 
-console.log(demo.static_website.getCurrentTime.call(null));
-
 return setTimeout(demo.static_website.setCurrentTime,(1000));
 });
 demo.static_website.setCurrentTime.call(null);
