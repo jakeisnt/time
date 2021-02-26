@@ -1,25 +1,70 @@
 // Compiled by ClojureScript 1.10.597 {}
 goog.provide('demo.static_website');
 goog.require('cljs.core');
-demo.static_website.updateTime = (function demo$static_website$updateTime(k){
-if((k < (10))){
-return ["0",cljs.core.str.cljs$core$IFn$_invoke$arity$1(k)].join('');
+demo.static_website.foldr = (function demo$static_website$foldr(fnc,base,lst){
+if(cljs.core.empty_QMARK_.call(null,lst)){
+return base;
 } else {
-return k;
+return fnc.call(null,cljs.core.first.call(null,lst),demo.static_website.foldr.call(null,cljs.core.rest.call(null,lst)));
 }
 });
-demo.static_website.getCurrentTime = (function demo$static_website$getCurrentTime(){
+demo.static_website.foldl = (function demo$static_website$foldl(fnc,base,lst){
+if(cljs.core.empty_QMARK_.call(null,lst)){
+return base;
+} else {
+return demo.static_website.foldl.call(null,fnc,fnc.call(null,cljs.core.first.call(null,lst),base),cljs.core.rest.call(null,lst));
+}
+});
+demo.static_website.padTime = (function demo$static_website$padTime(pad,k){
+return demo.static_website.foldl.call(null,cljs.core.str,k,cljs.core.repeat.call(null,(pad - cljs.core.str.cljs$core$IFn$_invoke$arity$1(k).length),(0)));
+});
+demo.static_website.getTimes = (function demo$static_website$getTimes(){
 var date = (new Date());
-var hrs = demo.static_website.updateTime.call(null,date.getHours());
-var min = demo.static_website.updateTime.call(null,date.getMinutes());
-var sec = demo.static_website.updateTime.call(null,date.getSeconds());
+var hrs = date.getHours();
+var min = date.getMinutes();
+var sec = date.getSeconds();
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [hrs,min,sec], null);
+});
+demo.static_website.getStandardTime = (function demo$static_website$getStandardTime(){
+var date = (new Date());
+var hrs = demo.static_website.padTime.call(null,(2),date.getHours());
+var min = demo.static_website.padTime.call(null,(2),date.getMinutes());
+var sec = demo.static_website.padTime.call(null,(2),date.getSeconds());
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(hrs),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(min),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(sec)].join('');
 });
-demo.static_website.setCurrentTime = (function demo$static_website$setCurrentTime(){
-(document.getElementById("clock").innerText = demo.static_website.getCurrentTime.call(null));
-
-return setTimeout(demo.static_website.setCurrentTime,(1000));
+demo.static_website.getSeconds = (function demo$static_website$getSeconds(){
+var date = (new Date());
+var hrs = date.getHours();
+var min = date.getMinutes();
+var sec = date.getSeconds();
+return (sec + ((60) * (min + (hrs * (60)))));
 });
-demo.static_website.setCurrentTime.call(null);
+demo.static_website.getNeralieTime = (function demo$static_website$getNeralieTime(){
+var pulses = (demo.static_website.getSeconds.call(null) / 86.4);
+var beat = Math.floor(pulses);
+var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (1000)))).substring((3));
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(demo.static_website.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(demo.static_website.padTime.call(null,(3),pulse))].join('');
+});
+demo.static_website.setCurrentTime = (function demo$static_website$setCurrentTime(elementId,getTimeFunc){
+(document.getElementById(elementId).innerText = getTimeFunc.call(null));
+
+return setTimeout((function (){
+return demo.static_website.setCurrentTime.call(null,elementId,getTimeFunc);
+}),(0));
+});
+demo.static_website.CLOCKLIST = (new cljs.core.List(null,(new cljs.core.List(null,"clock",(new cljs.core.List(null,demo.static_website.getStandardTime,null,(1),null)),(2),null)),(new cljs.core.List(null,(new cljs.core.List(null,"neralie",(new cljs.core.List(null,demo.static_website.getNeralieTime,null,(1),null)),(2),null)),null,(1),null)),(2),null));
+demo.static_website.makeElement = (function demo$static_website$makeElement(ls){
+var elem = document.createElement("div");
+var elemId = cljs.core.first.call(null,ls);
+var elemTimeFunc = cljs.core.nth.call(null,ls,(1));
+elem.setAttribute("id",elemId);
+
+elem.setAttribute("class","site__title");
+
+document.body.appendChild(elem);
+
+return demo.static_website.setCurrentTime.call(null,elemId,elemTimeFunc);
+});
+cljs.core.run_BANG_.call(null,demo.static_website.makeElement,demo.static_website.CLOCKLIST);
 
 //# sourceMappingURL=static_website.js.map
