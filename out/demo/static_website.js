@@ -1,7 +1,6 @@
 // Compiled by ClojureScript 1.10.597 {}
 goog.provide('demo.static_website');
 goog.require('cljs.core');
-console.log("Hello, Github Pages!");
 demo.static_website.updateTime = (function demo$static_website$updateTime(k){
 if((k < (10))){
 return ["0",cljs.core.str.cljs$core$IFn$_invoke$arity$1(k)].join('');

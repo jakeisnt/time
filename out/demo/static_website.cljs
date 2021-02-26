@@ -1,7 +1,5 @@
 (ns demo.static-website)
 
-(js/console.log "Hello, Github Pages!")
-
 ; truncate the time by prefixing it with a 0 as needed
 (defn updateTime [k]
   (if (< k 10) (str "0" k) k))
