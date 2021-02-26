@@ -2,4 +2,4 @@
 
 A simple, sample web application to practice ClojureScript development.
 
-This displays time in multiple formats.
+This displays time in multiple formats, and currently supports the traditional 24 hour format as well as the [[https://wiki.xxiivv.com/site/neralie.html][Neralie]] decimal time format.
