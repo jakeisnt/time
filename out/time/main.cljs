@@ -47,8 +47,10 @@
 
 (defn getCalDate []
   (let [date (js/Date.)
-        ye (.format (js/Intl.DateTimeFormat. "en") date)]
-    ye))
+        ye (.format (js/Intl.DateTimeFormat. "en" #js {:year "numeric"}) date)
+        mo (.format (js/Intl.DateTimeFormat. "en" #js {:month "short"}) date)
+        da (.format (js/Intl.DateTimeFormat. "en" #js {:day "2-digit"}) date)]
+    (str ye ":" mo ":" da)))
 
 ; update the website with the current time
 (defn setCurrentTime [elementId getTimeFunc]
