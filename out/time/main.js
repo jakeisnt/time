@@ -77,11 +77,7 @@ var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (10
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),pulse))].join('');
 });
 time.main.getCalDate = (function time$main$getCalDate(){
-var date = (new Date());
-var ye = (new Intl.DateTimeFormat("en",({"year": "numeric"}))).format(date);
-var mo = (new Intl.DateTimeFormat("en",({"month": "short"}))).format(date);
-var da = (new Intl.DateTimeFormat("en",({"day": "2-digit"}))).format(date);
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(ye),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(mo),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(da)].join('');
+return cljs.core.str.cljs$core$IFn$_invoke$arity$1((new Intl.DateTimeFormat("en",({"dateStyle": "full"}))).format((new Date())));
 });
 time.main.setCurrentTime = (function time$main$setCurrentTime(elementId,getTimeFunc){
 return (document.getElementById(elementId).innerText = getTimeFunc.call(null));

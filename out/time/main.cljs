@@ -46,11 +46,7 @@
     (str (padTime 3 beat) ":" (padTime 3 pulse))))
 
 (defn getCalDate []
-  (let [date (js/Date.)
-        ye (.format (js/Intl.DateTimeFormat. "en" #js {:year "numeric"}) date)
-        mo (.format (js/Intl.DateTimeFormat. "en" #js {:month "short"}) date)
-        da (.format (js/Intl.DateTimeFormat. "en" #js {:day "2-digit"}) date)]
-    (str ye ":" mo ":" da)))
+  (str (.format (js/Intl.DateTimeFormat. "en" #js {:dateStyle "full"}) (js/Date.))))
 
 ; update the website with the current time
 (defn setCurrentTime [elementId getTimeFunc]
