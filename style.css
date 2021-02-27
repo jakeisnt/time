@@ -15,7 +15,7 @@ body {
   text-align: center;
 }
 
-.tradclock, .neraliesection {
+.tradclock, .neraliesection, .agesection {
   display: flex;
   flex-direction: column;
   align-items: center;

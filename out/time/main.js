@@ -110,5 +110,21 @@ return time.main.setCurrentTime.call(null,elemId,elemTimeFunc);
 });
 cljs.core.run_BANG_.call(null,time.main.makeElement,time.main.CLOCKLIST);
 time.main.runClock.call(null);
+if(cljs.core.not.call(null,window.location.hash)){
+(window.location.hash = "1999-11-05");
+} else {
+}
+time.main.datehash = window.location.hash.replace("#","");
+time.main.showAge = (function time$main$showAge(){
+return (document.getElementById("numage").innerText = (((new Date()) - (new Date("1999-11-05"))) / (31557600000)).toFixed((9)));
+});
+time.main.start = (function time$main$start(){
+return setTimeout((function (){
+time.main.showAge.call(null);
+
+return requestAnimationFrame(time.main.start);
+}),((1000) / (30)));
+});
+time.main.start.call(null);
 
 //# sourceMappingURL=main.js.map

@@ -80,3 +80,18 @@
 
 (run! makeElement CLOCKLIST)
 (runClock)
+
+(if-not (.-hash (.-location js/window))
+  (set! (.-hash (.-location js/window)) "1999-11-05"))
+
+(def datehash (.replace (.-hash (.-location js/window)) "#" ""))
+
+(defn showAge []
+  (set! (.-innerText (.getElementById js/document "numage"))
+        (.toFixed (/ (- (js/Date.) (js/Date. "1999-11-05")) 31557600000) 9)))
+
+(defn start []
+  (js/setTimeout (fn [] (showAge) (js/requestAnimationFrame start)) (/ 1000 30)))
+
+(start)
+;; (showAge)
