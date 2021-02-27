@@ -7,8 +7,6 @@ body {
   font-family: Arial;
   align-items: center;
   justify-content: center;
-  /* display: flex; */
-  /* flex-direction: row; */
 }
 
 .num_clock {
@@ -20,6 +18,8 @@ body {
 .tradclock, .neraliesection {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /*  Clock styles */
