@@ -73,8 +73,37 @@ return (sec + ((60) * (min + (hrs * (60)))));
 time.main.getNeralieTime = (function time$main$getNeralieTime(){
 var pulses = (time.main.getSeconds.call(null) / 86.4);
 var beat = Math.floor(pulses);
-var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (1000)))).substring((3));
+var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (1000)))).substring((2));
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),pulse))].join('');
+});
+time.main.getCalDate = (function time$main$getCalDate(){
+return cljs.core.str.cljs$core$IFn$_invoke$arity$1((new Intl.DateTimeFormat("en",({"dateStyle": "full"}))).format((new Date())));
+});
+time.main.getDaysInMonth = (function time$main$getDaysInMonth(month,year){
+return (new Date(year,(month + (1)),(0))).getDate();
+});
+time.main.genListTo = (function time$main$genListTo(maxnum){
+var genAcc = (function time$main$genListTo_$_genAcc(count){
+if(cljs.core._EQ_.call(null,count,maxnum)){
+return (new cljs.core.List(null,count,null,(1),null));
+} else {
+return cljs.core.cons.call(null,count,time$main$genListTo_$_genAcc.call(null,(count + (1))));
+}
+});
+return genAcc.call(null,(0));
+});
+console.log(time.main.genListTo.call(null,(new Date()).getMonth()));
+time.main.getArvelieDate = (function time$main$getArvelieDate(){
+var date = (new Date());
+var year = (date.getFullYear() - (2020));
+var daysInMon = date.getDate();
+var daysSoFar = (daysInMon + time.main.foldl.call(null,(function (cum,month){
+return (cum + time.main.getDaysInMonth.call(null,month,year));
+}),(0),time.main.genListTo.call(null,date.getMonth())));
+var weekNum = Math.floor((daysSoFar / (14)));
+var week = (((weekNum > (27)))?"+":String.fromCharCode((weekNum + (65))));
+var day = cljs.core.rem.call(null,daysSoFar,(14));
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(2),year)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(week),cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(2),day))].join('');
 });
 time.main.setCurrentTime = (function time$main$setCurrentTime(elementId,getTimeFunc){
 return (document.getElementById(elementId).innerText = getTimeFunc.call(null));
@@ -115,9 +144,13 @@ time.main.setCurrentTime.call(null,"numclock",time.main.getStandardTime);
 
 time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
 
+time.main.setCurrentTime.call(null,"caldate",time.main.getCalDate);
+
+time.main.setCurrentTime.call(null,"arveliedate",time.main.getArvelieDate);
+
 return requestAnimationFrame(time.main.start);
 }),((1000) / (30)));
 });
-time.main.start.call(null);
+(window.onload = time.main.start);
 
 //# sourceMappingURL=main.js.map
