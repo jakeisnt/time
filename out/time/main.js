@@ -5,7 +5,7 @@ time.main.foldr = (function time$main$foldr(fnc,base,lst){
 if(cljs.core.empty_QMARK_.call(null,lst)){
 return base;
 } else {
-return fnc.call(null,cljs.core.first.call(null,lst),time.main.foldr.call(null,cljs.core.rest.call(null,lst)));
+return fnc.call(null,cljs.core.first.call(null,lst),time.main.foldr.call(null,fnc,base,cljs.core.rest.call(null,lst)));
 }
 });
 time.main.foldl = (function time$main$foldl(fnc,base,lst){
@@ -105,10 +105,9 @@ if(cljs.core._EQ_.call(null,"",window.location.hash)){
 } else {
 }
 
-time.main.datehash = window.location.hash.replace("#","");
-
+var datehash = window.location.hash.replace("#","");
 return setTimeout((function (){
-time.main.showAge.call(null,time.main.datehash);
+time.main.showAge.call(null,datehash);
 
 time.main.runClock.call(null);
 
@@ -117,7 +116,7 @@ time.main.setCurrentTime.call(null,"numclock",time.main.getStandardTime);
 time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
 
 return requestAnimationFrame(time.main.start);
-}),((1000) / (100)));
+}),((1000) / (30)));
 });
 time.main.start.call(null);
 
