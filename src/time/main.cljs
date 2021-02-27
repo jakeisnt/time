@@ -84,5 +84,4 @@
     (setCurrentTime elemId elemTimeFunc)))
 
 (run! makeElement CLOCKLIST)
-
 (runClock)
