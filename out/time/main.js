@@ -77,13 +77,8 @@ var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (10
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),pulse))].join('');
 });
 time.main.setCurrentTime = (function time$main$setCurrentTime(elementId,getTimeFunc){
-(document.getElementById(elementId).innerText = getTimeFunc.call(null));
-
-return setTimeout((function (){
-return time.main.setCurrentTime.call(null,elementId,getTimeFunc);
-}),(0));
+return (document.getElementById(elementId).innerText = getTimeFunc.call(null));
 });
-time.main.CLOCKLIST = (new cljs.core.List(null,(new cljs.core.List(null,"numclock",(new cljs.core.List(null,time.main.getStandardTime,null,(1),null)),(2),null)),(new cljs.core.List(null,(new cljs.core.List(null,"numneralie",(new cljs.core.List(null,time.main.getNeralieTime,null,(1),null)),(2),null)),null,(1),null)),(2),null));
 time.main.runClock = (function time$main$runClock(){
 var hourhand = document.querySelector("#hour");
 var minutehand = document.querySelector("#minute");
@@ -99,14 +94,7 @@ var secPos = ((sec * (360)) / (60));
 
 (minutehand.style.transform = ["rotate(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(minPos),"deg)"].join(''));
 
-(secondhand.style.transform = ["rotate(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(secPos),"deg)"].join(''));
-
-return setTimeout(time.main.runClock,(1000));
-});
-time.main.makeElement = (function time$main$makeElement(ls){
-var elemId = cljs.core.first.call(null,ls);
-var elemTimeFunc = cljs.core.nth.call(null,ls,(1));
-return time.main.setCurrentTime.call(null,elemId,elemTimeFunc);
+return (secondhand.style.transform = ["rotate(",cljs.core.str.cljs$core$IFn$_invoke$arity$1(secPos),"deg)"].join(''));
 });
 time.main.showAge = (function time$main$showAge(date){
 return (document.getElementById("numage").innerText = (((new Date()) - (new Date(date))) / (31557600000)).toFixed((9)));
@@ -119,15 +107,17 @@ if(cljs.core._EQ_.call(null,"",window.location.hash)){
 
 time.main.datehash = window.location.hash.replace("#","");
 
-cljs.core.run_BANG_.call(null,time.main.makeElement,time.main.CLOCKLIST);
-
-time.main.runClock.call(null);
-
 return setTimeout((function (){
 time.main.showAge.call(null,time.main.datehash);
 
+time.main.runClock.call(null);
+
+time.main.setCurrentTime.call(null,"numclock",time.main.getStandardTime);
+
+time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
+
 return requestAnimationFrame(time.main.start);
-}),((1000) / (30)));
+}),((1000) / (100)));
 });
 time.main.start.call(null);
 

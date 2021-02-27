@@ -48,12 +48,7 @@
 
 ; update the website with the current time
 (defn setCurrentTime [elementId getTimeFunc]
-    (set! (.-innerText (.getElementById js/document elementId)) (getTimeFunc))
-    (js/setTimeout (fn [] (setCurrentTime elementId getTimeFunc)) 0))
-
-;; list of clocks to use and their names
-(def CLOCKLIST (list (list "numclock" getStandardTime)
-                     (list "numneralie" getNeralieTime)))
+    (set! (.-innerText (.getElementById js/document elementId)) (getTimeFunc)))
 
 ;; from https://medium.com/@abhi95.saxena/make-an-analog-clock-using-javascript-7c07580ea91b
 (defn runClock []
@@ -69,16 +64,10 @@
               secPos (/ (* sec 360) 60)]
           (set! (.-transform (.-style hourhand)) (str "rotate(" hrPos "deg)"))
           (set! (.-transform (.-style minutehand)) (str "rotate(" minPos "deg)"))
-          (set! (.-transform (.-style secondhand)) (str "rotate(" secPos "deg)"))
-          (js/setTimeout runClock 1000))))))
-
-;; given an element of the clocklist, make
-(defn makeElement [ls]
-  (let [elemId (first ls)
-        elemTimeFunc (nth ls 1)]
-    (setCurrentTime elemId elemTimeFunc)))
+          (set! (.-transform (.-style secondhand)) (str "rotate(" secPos "deg)")))))))
 
 ;; show age starting at the provided date
+;; inspiration: https://github.com/neauoire/age/blob/master/index.html
 (defn showAge [date]
   (set! (.-innerText (.getElementById js/document "numage"))
         (.toFixed (/ (- (js/Date.) (js/Date. date)) 31557600000) 9)))
@@ -91,9 +80,13 @@
 
   (def datehash (.replace (.-hash (.-location js/window)) "#" ""))
 
-  (run! makeElement CLOCKLIST)
-  (runClock)
-  (js/setTimeout (fn [] (showAge datehash) (js/requestAnimationFrame start)) (/ 1000 30)))
+  (js/setTimeout (fn []
+                   (showAge datehash)
+                   (runClock)
+                   (setCurrentTime "numclock" getStandardTime)
+                   (setCurrentTime "numneralie" getNeralieTime)
+                   (js/requestAnimationFrame start))
+                 (/ 1000 100)))
 
 ;; start the application!
 (start)
