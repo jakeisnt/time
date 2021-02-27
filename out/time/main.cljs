@@ -115,11 +115,10 @@
      (fn []
        (showAge datehash)
        (runClock)
-       (setCurrentTime "arveliedate" getArvelieDate)
        (setCurrentTime "numclock" getStandardTime)
        (setCurrentTime "numneralie" getNeralieTime)
        (setCurrentTime "caldate" getCalDate)
-       (js/console.log (getArvelieDate))
+       ;; (setCurrentTime "arveliedate" getArvelieDate)
        (js/requestAnimationFrame start))
      (/ 1000 30))))
 

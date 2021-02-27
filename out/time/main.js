@@ -140,15 +140,11 @@ time.main.showAge.call(null,datehash);
 
 time.main.runClock.call(null);
 
-time.main.setCurrentTime.call(null,"arveliedate",time.main.getArvelieDate);
-
 time.main.setCurrentTime.call(null,"numclock",time.main.getStandardTime);
 
 time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
 
 time.main.setCurrentTime.call(null,"caldate",time.main.getCalDate);
-
-console.log(time.main.getArvelieDate.call(null));
 
 return requestAnimationFrame(time.main.start);
 }),((1000) / (30)));
