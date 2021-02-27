@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Time</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <meta charset="utf-8"/>
-  </head>
-  <body>
-      <div class="tradclock" id="tradclock">
-        <div id="numclock" class="num_clock"></div>
-        <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
-            <g id="face">
-                <circle class="circle" cx="300" cy="300" r="253.9"/>
-                <circle class="mid-circle" cx="300" cy="300" r="7"/>
-            </g>
-            <g id="hour">
-                <path class="hour-arm" d="M300.5 298V142"/>
-                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
-            </g>
-            <g id="minute">
-                <path class="minute-arm" d="M300.5 298V67"/>
-                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
-            </g>
-            <g id="second">
-                <path class="second-arm" d="M300.5 298V55"/>
-                <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
-            </g>
-        </svg>
-      </div>
-      <div id="neraliesection" class="neraliesection">
-          <div id="numneralie" class="num_clock"/>
-      </div>
-      <div id="agesection" class="agesection">
-          <div id="numage" class="num_clock"/>
-      </div>
-      <div id="calsection" class="calsection">
-          <div id="caldate" class="num_clock"/>
-          <div id="arveliedate" class="num_clock"/>
-      </div>
-      <script src="./out/main.js"></script>
-  </body>
+    <head>
+        <title>Time</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <meta charset="utf-8"/>
+        <script src="./out/main.js"></script>
+    </head>
+    <body>
+        <div class="tradclock" id="tradclock">
+            <div id="numclock" class="num_clock"></div>
+            <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+                <g id="face">
+                    <circle class="circle" cx="300" cy="300" r="253.9"/>
+                    <circle class="mid-circle" cx="300" cy="300" r="7"/>
+                </g>
+                <g id="hour">
+                    <path class="hour-arm" d="M300.5 298V142"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+                <g id="minute">
+                    <path class="minute-arm" d="M300.5 298V67"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+                <g id="second">
+                    <path class="second-arm" d="M300.5 298V55"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+            </svg>
+        </div>
+          <div id="neraliesection" class="neraliesection">
+              <div id="numneralie" class="num_clock"></div>
+          </div>
+          <div id="agesection" class="agesection">
+              <div id="numage" class="num_clock"></div>
+          </div>
+          <div id="calsection" class="calsection">
+              <div id="caldate" class="num_clock"></div>
+              <div id="arveliedate" class="num_clock"></div>
+          </div>
+    </body>
 </html>
