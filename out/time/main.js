@@ -45,7 +45,7 @@ return setTimeout((function (){
 return time.main.setCurrentTime.call(null,elementId,getTimeFunc);
 }),(0));
 });
-time.main.CLOCKLIST = (new cljs.core.List(null,(new cljs.core.List(null,"clock",(new cljs.core.List(null,time.main.getStandardTime,null,(1),null)),(2),null)),(new cljs.core.List(null,(new cljs.core.List(null,"neralie",(new cljs.core.List(null,time.main.getNeralieTime,null,(1),null)),(2),null)),null,(1),null)),(2),null));
+time.main.CLOCKLIST = (new cljs.core.List(null,(new cljs.core.List(null,"numclock",(new cljs.core.List(null,time.main.getStandardTime,null,(1),null)),(2),null)),(new cljs.core.List(null,(new cljs.core.List(null,"numneralie",(new cljs.core.List(null,time.main.getNeralieTime,null,(1),null)),(2),null)),null,(1),null)),(2),null));
 time.main.runClock = (function time$main$runClock(){
 var hourhand = document.querySelector("#hour");
 var minutehand = document.querySelector("#minute");
@@ -66,15 +66,8 @@ var secPos = ((sec * (360)) / (60));
 return setTimeout(time.main.runClock,(1000));
 });
 time.main.makeElement = (function time$main$makeElement(ls){
-var elem = document.createElement("div");
 var elemId = cljs.core.first.call(null,ls);
 var elemTimeFunc = cljs.core.nth.call(null,ls,(1));
-elem.setAttribute("id",elemId);
-
-elem.setAttribute("class","site__title");
-
-document.body.appendChild(elem);
-
 return time.main.setCurrentTime.call(null,elemId,elemTimeFunc);
 });
 cljs.core.run_BANG_.call(null,time.main.makeElement,time.main.CLOCKLIST);

@@ -52,8 +52,8 @@
     (js/setTimeout (fn [] (setCurrentTime elementId getTimeFunc)) 0))
 
 ;; list of clocks to use and their names
-(def CLOCKLIST (list (list "clock" getStandardTime)
-                     (list "neralie" getNeralieTime)))
+(def CLOCKLIST (list (list "numclock" getStandardTime)
+                     (list "numneralie" getNeralieTime)))
 
 
 ;; from https://medium.com/@abhi95.saxena/make-an-analog-clock-using-javascript-7c07580ea91b
@@ -75,12 +75,8 @@
 
 ;; given an element of the clocklist, make
 (defn makeElement [ls]
-  (let [elem (.createElement js/document "div")
-        elemId (first ls)
+  (let [elemId (first ls)
         elemTimeFunc (nth ls 1)]
-    (.setAttribute elem "id" elemId)
-    (.setAttribute elem "class" "site__title")
-    (.appendChild (.-body js/document) elem)
     (setCurrentTime elemId elemTimeFunc)))
 
 (run! makeElement CLOCKLIST)

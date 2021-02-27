@@ -7,12 +7,19 @@ body {
   font-family: Arial;
   align-items: center;
   justify-content: center;
+  /* display: flex; */
+  /* flex-direction: row; */
 }
 
-.site__title {
+.num_clock {
   font-size: 100px;
   width: 50%;
   text-align: center;
+}
+
+.tradclock, .neraliesection {
+  display: flex;
+  flex-direction: column;
 }
 
 /*  Clock styles */
