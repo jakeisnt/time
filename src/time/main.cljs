@@ -78,13 +78,6 @@
         elemTimeFunc (nth ls 1)]
     (setCurrentTime elemId elemTimeFunc)))
 
-(run! makeElement CLOCKLIST)
-(runClock)
-
-(if-not (.-hash (.-location js/window))
-  (set! (.-hash (.-location js/window)) "1999-11-05"))
-
-(def datehash (.replace (.-hash (.-location js/window)) "#" ""))
 
 ;; show age
 (defn showAge []
@@ -93,6 +86,14 @@
 
 ;; start the show age function
 (defn start []
+  (if-not (.-hash (.-location js/window))
+    (set! (.-hash (.-location js/window)) "1999-11-05"))
+
+  (def datehash (.replace (.-hash (.-location js/window)) "#" ""))
+
+  (run! makeElement CLOCKLIST)
+  (runClock)
   (js/setTimeout (fn [] (showAge) (js/requestAnimationFrame start)) (/ 1000 30)))
 
+;; start the application!
 (start)
