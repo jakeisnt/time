@@ -108,11 +108,11 @@ var elemId = cljs.core.first.call(null,ls);
 var elemTimeFunc = cljs.core.nth.call(null,ls,(1));
 return time.main.setCurrentTime.call(null,elemId,elemTimeFunc);
 });
-time.main.showAge = (function time$main$showAge(){
-return (document.getElementById("numage").innerText = (((new Date()) - (new Date("1999-11-05"))) / (31557600000)).toFixed((9)));
+time.main.showAge = (function time$main$showAge(date){
+return (document.getElementById("numage").innerText = (((new Date()) - (new Date(date))) / (31557600000)).toFixed((9)));
 });
 time.main.start = (function time$main$start(){
-if(cljs.core.not.call(null,window.location.hash)){
+if(cljs.core._EQ_.call(null,"",window.location.hash)){
 (window.location.hash = "1999-11-05");
 } else {
 }
@@ -124,7 +124,7 @@ cljs.core.run_BANG_.call(null,time.main.makeElement,time.main.CLOCKLIST);
 time.main.runClock.call(null);
 
 return setTimeout((function (){
-time.main.showAge.call(null);
+time.main.showAge.call(null,time.main.datehash);
 
 return requestAnimationFrame(time.main.start);
 }),((1000) / (30)));

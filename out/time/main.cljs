@@ -78,21 +78,22 @@
         elemTimeFunc (nth ls 1)]
     (setCurrentTime elemId elemTimeFunc)))
 
-
-;; show age
-(defn showAge []
+;; show age starting at the provided date
+(defn showAge [date]
   (set! (.-innerText (.getElementById js/document "numage"))
-        (.toFixed (/ (- (js/Date.) (js/Date. "1999-11-05")) 31557600000) 9)))
+        (.toFixed (/ (- (js/Date.) (js/Date. date)) 31557600000) 9)))
 
 ;; start the show age function
 (defn start []
-  (if-not (.-hash (.-location js/window))
+  ;; if nothing is provided for the hash, set it to my birthday!
+  (if (= "" (.-hash (.-location js/window)))
     (set! (.-hash (.-location js/window)) "1999-11-05"))
 
   (def datehash (.replace (.-hash (.-location js/window)) "#" ""))
 
   (run! makeElement CLOCKLIST)
   (runClock)
-  (js/setTimeout (fn [] (showAge) (js/requestAnimationFrame start)) (/ 1000 30)))
+  (js/setTimeout (fn [] (showAge datehash) (js/requestAnimationFrame start)) (/ 1000 30)))
 
+;; start the application!
 (start)
