@@ -45,6 +45,11 @@
         pulse (.substring (str (Math/floor (* pulses 1000))) 3)]
     (str (padTime 3 beat) ":" (padTime 3 pulse))))
 
+(defn getCalDate []
+  (let [date (js/Date.)
+        ye (.format (js/Intl.DateTimeFormat. "en") date)]
+    ye))
+
 ; update the website with the current time
 (defn setCurrentTime [elementId getTimeFunc]
   (set! (.-innerText (.getElementById js/document elementId)) (getTimeFunc)))
@@ -84,6 +89,7 @@
        (runClock)
        (setCurrentTime "numclock" getStandardTime)
        (setCurrentTime "numneralie" getNeralieTime)
+       (setCurrentTime "caldate" getCalDate)
        (js/requestAnimationFrame start))
      (/ 1000 30))))
 

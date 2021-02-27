@@ -76,6 +76,11 @@ var beat = Math.floor(pulses);
 var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (1000)))).substring((3));
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),pulse))].join('');
 });
+time.main.getCalDate = (function time$main$getCalDate(){
+var date = (new Date());
+var ye = (new Intl.DateTimeFormat("en")).format(date);
+return ye;
+});
 time.main.setCurrentTime = (function time$main$setCurrentTime(elementId,getTimeFunc){
 return (document.getElementById(elementId).innerText = getTimeFunc.call(null));
 });
@@ -114,6 +119,8 @@ time.main.runClock.call(null);
 time.main.setCurrentTime.call(null,"numclock",time.main.getStandardTime);
 
 time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
+
+time.main.setCurrentTime.call(null,"caldate",time.main.getCalDate);
 
 return requestAnimationFrame(time.main.start);
 }),((1000) / (30)));
