@@ -80,7 +80,7 @@ time.main.getCalDate = (function time$main$getCalDate(){
 return cljs.core.str.cljs$core$IFn$_invoke$arity$1((new Intl.DateTimeFormat("en",({"dateStyle": "full"}))).format((new Date())));
 });
 time.main.getDaysInMonth = (function time$main$getDaysInMonth(month,year){
-return (new Date(year,month,(0))).getDate();
+return (new Date(year,(month + (1)),(0))).getDate();
 });
 time.main.genListTo = (function time$main$genListTo(maxnum){
 var genAcc = (function time$main$genListTo_$_genAcc(count){
@@ -92,16 +92,18 @@ return cljs.core.cons.call(null,count,time$main$genListTo_$_genAcc.call(null,(co
 });
 return genAcc.call(null,(0));
 });
+console.log(time.main.genListTo.call(null,(new Date()).getMonth()));
 time.main.getArvelieDate = (function time$main$getArvelieDate(){
 var date = (new Date());
-var year = (date.getFullYear() - (2021));
-var daysSoFar = time.main.foldl.call(null,(function (cum,month){
+var year = (date.getFullYear() - (2020));
+var daysInMon = date.getDate();
+var daysSoFar = (daysInMon + time.main.foldl.call(null,(function (cum,month){
 return (cum + time.main.getDaysInMonth.call(null,month,year));
-}),(0),time.main.genListTo.call(null,date.getMonth()));
-var weekNum = (daysSoFar / (14));
-var week = (((weekNum > (27)))?"+":String.fromCharCode((weekNum + (63))));
+}),(0),time.main.genListTo.call(null,date.getMonth())));
+var weekNum = Math.floor((daysSoFar / (14)));
+var week = (((weekNum > (27)))?"+":String.fromCharCode((weekNum + (65))));
 var day = cljs.core.rem.call(null,daysSoFar,(14));
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(year),cljs.core.str.cljs$core$IFn$_invoke$arity$1(week),cljs.core.str.cljs$core$IFn$_invoke$arity$1(day)].join('');
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(2),year)),cljs.core.str.cljs$core$IFn$_invoke$arity$1(week),cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(2),day))].join('');
 });
 time.main.setCurrentTime = (function time$main$setCurrentTime(elementId,getTimeFunc){
 return (document.getElementById(elementId).innerText = getTimeFunc.call(null));
@@ -138,11 +140,15 @@ time.main.showAge.call(null,datehash);
 
 time.main.runClock.call(null);
 
+time.main.setCurrentTime.call(null,"arveliedate",time.main.getArvelieDate);
+
 time.main.setCurrentTime.call(null,"numclock",time.main.getStandardTime);
 
 time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
 
 time.main.setCurrentTime.call(null,"caldate",time.main.getCalDate);
+
+console.log(time.main.getArvelieDate.call(null));
 
 return requestAnimationFrame(time.main.start);
 }),((1000) / (30)));

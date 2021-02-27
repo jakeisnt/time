@@ -50,8 +50,8 @@
   (str (.format (js/Intl.DateTimeFormat. "en" #js {:dateStyle "full"}) (js/Date.))))
 
 ;; get number of days in month given year
-(defn getDaysInMonth [month, year]
-  (.getDate (js/Date. year month 0)))
+(defn getDaysInMonth [month year]
+  (.getDate (js/Date. year (+ month 1) 0)))
 
 ;; generate list (0, 1, 2 .. maxNum)
 (defn genListTo [maxnum]
@@ -61,18 +61,22 @@
               (cons count (genAcc (+ count 1)))))]
     (genAcc 0)))
 
+(js/console.log (genListTo (.getMonth (js/Date.))))
+
 (defn getArvelieDate []
   (let
    [date (js/Date.)
-    year (- (.getFullYear date) 2021)
-    daysSoFar (foldl
-               (fn [cum month] (+ cum (getDaysInMonth month year)))
-               0
-               (genListTo (.getMonth date)))
-    weekNum (/ daysSoFar 14)
-    week (if (> weekNum 27) "+" (js/String.fromCharCode (+ weekNum 63)))
+    year (- (.getFullYear date) 2020)
+    daysInMon (.getDate date)
+    daysSoFar (+ daysInMon
+                 (foldl
+                  (fn [cum month] (+ cum (getDaysInMonth month year)))
+                  0
+                  (genListTo (.getMonth date))))
+    weekNum (Math/floor (/ daysSoFar 14))
+    week (if (> weekNum 27) "+" (js/String.fromCharCode (+ weekNum 65)))
     day (rem daysSoFar 14)]
-    (str year week day)))
+    (str (padTime 2 year) week (padTime 2 day))))
 
 ; update the website with the current time
 (defn setCurrentTime [elementId getTimeFunc]
