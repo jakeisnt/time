@@ -16,12 +16,12 @@
   (foldl str k (repeat (- pad (.-length (str k))) 0)))
 
 ; get times from the javascript date object
-;; (defn getTimes []
-;;   (let [date (js/Date.)]
-;;     (let [hrs (.getHours date)
-;;           min (.getMinutes date)
-;;           sec (.getSeconds date)]
-;;       {:hours hrs :minutes min :seconds sec})))
+(defn getTimes [d]
+  (let [date (if d d (js/Date.))]
+    (let [hrs (.getHours date)
+          min (.getMinutes date)
+          sec (.getSeconds date)]
+      {:hours hrs :minutes min :seconds sec})))
 
 ; get the current time
 (defn getStandardTime []
