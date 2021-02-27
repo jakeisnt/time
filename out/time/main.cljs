@@ -118,9 +118,9 @@
        (setCurrentTime "numclock" getStandardTime)
        (setCurrentTime "numneralie" getNeralieTime)
        (setCurrentTime "caldate" getCalDate)
-       ;; (setCurrentTime "arveliedate" getArvelieDate)
+       (setCurrentTime "arveliedate" getArvelieDate)
        (js/requestAnimationFrame start))
      (/ 1000 30))))
 
 ;; start the application
-(start)
+(set! (.-onload js/window) start)

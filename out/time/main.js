@@ -146,9 +146,11 @@ time.main.setCurrentTime.call(null,"numneralie",time.main.getNeralieTime);
 
 time.main.setCurrentTime.call(null,"caldate",time.main.getCalDate);
 
+time.main.setCurrentTime.call(null,"arveliedate",time.main.getArvelieDate);
+
 return requestAnimationFrame(time.main.start);
 }),((1000) / (30)));
 });
-time.main.start.call(null);
+(window.onload = time.main.start);
 
 //# sourceMappingURL=main.js.map
