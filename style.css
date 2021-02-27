@@ -9,8 +9,55 @@ body {
   justify-content: center;
 }
 
-.site__title {
+.num_clock {
   font-size: 100px;
   width: 50%;
   text-align: center;
+}
+
+.tradclock, .neraliesection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*  Clock styles */
+.hour-arm, .minute-arm, .second-arm, .mid-circle {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.mid-circle {
+  stroke-width: 10;
+  stroke-miterlimit: 10;
+}
+
+.hour-arm {
+    stroke-width: 10;
+    stroke-miterlimit: 10;
+}
+
+.minute-arm {
+    stroke-width: 10;
+    stroke-miterlimit: 10;
+}
+
+.second-arm {
+    stroke-width: 10;
+    stroke-miterlimit: 10;
+}
+
+/* Transparent box ensuring arms center properly. */
+.sizing-box {
+    fill: none;
+}
+
+/* Make all arms rotate around the same center point. */
+/* Optional: Use transition for animation. */
+#hour,
+#minute,
+#second {
+    transform-origin: 300px 300px;
+    transition: transform .5s ease-in-out;
 }

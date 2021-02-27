@@ -16,12 +16,12 @@
   (foldl str k (repeat (- pad (.-length (str k))) 0)))
 
 ; get times from the javascript date object
-(defn getTimes []
-  (let [date (js/Date.)]
-    (let [hrs (.getHours date)
-          min (.getMinutes date)
-          sec (.getSeconds date)]
-      [hrs, min, sec])))
+;; (defn getTimes []
+;;   (let [date (js/Date.)]
+;;     (let [hrs (.getHours date)
+;;           min (.getMinutes date)
+;;           sec (.getSeconds date)]
+;;       {:hours hrs :minutes min :seconds sec})))
 
 ; get the current time
 (defn getStandardTime []
@@ -30,8 +30,6 @@
           min (padTime 2 (.getMinutes date))
           sec (padTime 2 (.getSeconds date))]
     (str hrs ":" min ":" sec))))
-
-;; (defn remainder [x y] (* (Math/floor (/ y x)) y))
 
 ;; get the number of seconds that have passed
 (defn getSeconds []
@@ -54,17 +52,32 @@
     (js/setTimeout (fn [] (setCurrentTime elementId getTimeFunc)) 0))
 
 ;; list of clocks to use and their names
-(def CLOCKLIST (list (list "clock" getStandardTime)
-                     (list "neralie" getNeralieTime)))
+(def CLOCKLIST (list (list "numclock" getStandardTime)
+                     (list "numneralie" getNeralieTime)))
+
+
+;; from https://medium.com/@abhi95.saxena/make-an-analog-clock-using-javascript-7c07580ea91b
+(defn runClock []
+  (let [hourhand (.querySelector js/document "#hour")
+       minutehand (.querySelector js/document "#minute")
+       secondhand (.querySelector js/document "#second")]
+  (let [date (js/Date.)]
+    (let [hrs (.getHours date)
+          min (.getMinutes date)
+          sec (.getSeconds date)]
+        (let [hrPos (+ (/ (* hrs 360) 12) (/ (/ (* min 360) 60) 12))
+              minPos (+ (/ (* min 60) 60) (/ (/ (* sec 60) 60) 60))
+              secPos (/ (* sec 360) 60)]
+          (set! (.-transform (.-style hourhand)) (str "rotate(" hrPos "deg)"))
+          (set! (.-transform (.-style minutehand)) (str "rotate(" minPos "deg)"))
+          (set! (.-transform (.-style secondhand)) (str "rotate(" secPos "deg)"))
+          (js/setTimeout runClock 1000))))))
 
 ;; given an element of the clocklist, make
 (defn makeElement [ls]
-  (let [elem (.createElement js/document "div")
-        elemId (first ls)
+  (let [elemId (first ls)
         elemTimeFunc (nth ls 1)]
-    (.setAttribute elem "id" elemId)
-    (.setAttribute elem "class" "site__title")
-    (.appendChild (.-body js/document) elem)
     (setCurrentTime elemId elemTimeFunc)))
 
 (run! makeElement CLOCKLIST)
+(runClock)
