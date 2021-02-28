@@ -47,7 +47,8 @@
 
 ;; get the calendar date!
 (defn getCalDate []
-  (str (.format (js/Intl.DateTimeFormat. "en" #js {:dateStyle "full"}) (js/Date.))))
+  (let [calstr (str (.format (js/Intl.DateTimeFormat. "en" #js {:dateStyle "full"}) (js/Date.)))]
+    (.substr calstr (+ 1 (.indexOf calstr " ")))))
 
 ;; get number of days in month given year
 (defn getDaysInMonth [month year]

@@ -77,7 +77,8 @@ var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (10
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),pulse))].join('');
 });
 time.main.getCalDate = (function time$main$getCalDate(){
-return cljs.core.str.cljs$core$IFn$_invoke$arity$1((new Intl.DateTimeFormat("en",({"dateStyle": "full"}))).format((new Date())));
+var calstr = cljs.core.str.cljs$core$IFn$_invoke$arity$1((new Intl.DateTimeFormat("en",({"dateStyle": "full"}))).format((new Date())));
+return calstr.substr(((1) + calstr.indexOf(" ")));
 });
 time.main.getDaysInMonth = (function time$main$getDaysInMonth(month,year){
 return (new Date(year,(month + (1)),(0))).getDate();
