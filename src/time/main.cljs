@@ -62,8 +62,6 @@
               (cons count (genAcc (+ count 1)))))]
     (genAcc 0)))
 
-(js/console.log (genListTo (.getMonth (js/Date.))))
-
 (defn getArvelieDate []
   (let
    [date (js/Date.)
