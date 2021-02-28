@@ -65,7 +65,7 @@ return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(hrs),":",cljs.core.str.cljs$
 });
 time.main.getSeconds = (function time$main$getSeconds(){
 var date = time.main.getTimes.call(null);
-var hrs = new cljs.core.Keyword(null,"hours","hours",58380855).cljs$core$IFn$_invoke$arity$1(date);
+var hrs = new cljs.core.Keyword(null,"hrs","hrs",-1479098314).cljs$core$IFn$_invoke$arity$1(date);
 var min = new cljs.core.Keyword(null,"mins","mins",467369676).cljs$core$IFn$_invoke$arity$1(date);
 var sec = new cljs.core.Keyword(null,"secs","secs",1532330091).cljs$core$IFn$_invoke$arity$1(date);
 return (sec + ((60) * (min + (hrs * (60)))));
@@ -73,7 +73,9 @@ return (sec + ((60) * (min + (hrs * (60)))));
 time.main.getNeralieTime = (function time$main$getNeralieTime(){
 var pulses = (time.main.getSeconds.call(null) / 86.4);
 var beat = Math.floor(pulses);
-var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (1000)))).substring((2));
+var pulse = cljs.core.str.cljs$core$IFn$_invoke$arity$1(Math.floor((pulses * (1000)))).substring((3));
+console.log(pulses);
+
 return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),beat)),":",cljs.core.str.cljs$core$IFn$_invoke$arity$1(time.main.padTime.call(null,(3),pulse))].join('');
 });
 time.main.getCalDate = (function time$main$getCalDate(){
@@ -93,7 +95,6 @@ return cljs.core.cons.call(null,count,time$main$genListTo_$_genAcc.call(null,(co
 });
 return genAcc.call(null,(0));
 });
-console.log(time.main.genListTo.call(null,(new Date()).getMonth()));
 time.main.getArvelieDate = (function time$main$getArvelieDate(){
 var date = (new Date());
 var year = (date.getFullYear() - (2020));

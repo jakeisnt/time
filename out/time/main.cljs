@@ -33,7 +33,7 @@
 ;; get the number of seconds that have passed
 (defn getSeconds []
   (let [date (getTimes)
-        hrs (:hours date)
+        hrs (:hrs date)
         min (:mins date)
         sec (:secs date)]
     (+ sec (* 60 (+ min (* hrs 60))))))
@@ -42,7 +42,8 @@
 (defn getNeralieTime []
   (let [pulses (/ (getSeconds) 86.4)
         beat (Math/floor pulses)
-        pulse (.substring (str (Math/floor (* pulses 1000))) 2)]
+        pulse (.substring (str (Math/floor (* pulses 1000))) 3)]
+    (js/console.log pulses)
     (str (padTime 3 beat) ":" (padTime 3 pulse))))
 
 ;; get the calendar date!
@@ -61,8 +62,6 @@
               (list count)
               (cons count (genAcc (+ count 1)))))]
     (genAcc 0)))
-
-(js/console.log (genListTo (.getMonth (js/Date.))))
 
 (defn getArvelieDate []
   (let
