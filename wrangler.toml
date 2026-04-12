@@ -1,0 +1,4 @@
+name = "time"
+compatibility_date = "2026-04-12"
+pages_build_output_dir = "."
+# This project is built locally before deployment; no Cloudflare build command is used.

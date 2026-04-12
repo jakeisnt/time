@@ -1,4 +1,77 @@
-@import url("https://jakeisnt.github.io/styles/main.css")
+/*
+ * Base styles below were vendored from:
+ * https://jakeisnt.github.io/styles/main.css
+ *
+ * They are inlined here because that repo is outdated and this site should
+ * not depend on a remote stylesheet at runtime.
+ */
+html {
+  font-size: 20px;
+  font-family: "Arial", "Helvetica", sans-serif;
+}
+
+a:link {
+  color: #484848;
+}
+
+a:visited {
+  color: #585858;
+}
+
+a:hover {
+  color: black;
+}
+
+a:active {
+  color: blue;
+}
+
+a[href^="./"] {
+  color: #505050;
+}
+
+::selection {
+  background-color: #99ccff;
+}
+
+footer {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+img {
+  vertical-align: middle;
+}
+
+#br {
+  display: block;
+  margin: 0 0;
+}
+
+h1 {
+  display: block;
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+h2 {
+  display: block;
+  font-size: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+* {
+  white-space: pre-wrap;
+}
 
 body {
   margin: 0;
