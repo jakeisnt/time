@@ -1,4 +1,4 @@
-#+TITLE: Time
+# Time
 
 A simple, sample web application to practice ClojureScript development.
 
